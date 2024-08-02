@@ -1,4 +1,4 @@
-﻿﻿@page "/"
+﻿@page "/"
 
 
 <PageTitle>PetShop</PageTitle>
@@ -54,7 +54,7 @@
                                             <MudCardContent  Style="margin-bottom: 15px">
                                                 <MudText Typo="Typo.h4">@MelhorCanilFeliz.NomePetShop</MudText>
                                                 <MudText Typo="Typo.h5">Valor Banho: @MelhorCanilFeliz.PrecoTotal</MudText>
-                                                <MudText Typo="Typo.h5">Distancia: @MelhorCanilFeliz.Distancia.ToString("F2")</MudText>                               
+                                                <MudText Typo="Typo.h5">Distancia: @MelhorCanilFeliz.Distancia.ToString("0.00")</MudText>                               
                                             </MudCardContent>
 
                                             <MudCardContent Style="margin-bottom: 15px">
@@ -66,7 +66,7 @@
                                             <MudCardContent Style="margin-bottom: 15px">
                                                 <MudText  Typo="Typo.h4">@MelhorCanilVaiRex.NomePetShop</MudText>
                                                 <MudText Typo="Typo.h5">Valor Banho: @MelhorCanilVaiRex.PrecoTotal</MudText>
-                                                    <MudText Typo="Typo.h5">Distancia: @MelhorCanilVaiRex.Distancia.ToString("F2")</MudText>
+                                            <MudText Typo="Typo.h5">Distancia: @MelhorCanilVaiRex.Distancia.ToString("C2")</MudText>
                                             </MudCardContent>
                                         </MudCard>
                                     </MudItem>
@@ -91,7 +91,7 @@
 
     public PetShopRex VaiRex { get; set; } = new();
 
-    public PetShopChochow ChowChow { get; set; } = new();
+    public PetShopChowChow ChowChow { get; set; } = new();
 
     public Color ColorFeliz { get; set; }
     public Color ColorRex { get; set; }
@@ -110,7 +110,7 @@
 
     protected override void OnInitialized( )
     {
-        AdicionarDados();
+        AdicionarDadosPetShop();
     }
 
     private void BuscarPetShop( )
@@ -118,42 +118,24 @@
         CalcularPreco(CaninoFeliz, VaiRex, ChowChow);
     }
 
-    private void EscolherMelhorCanilDistancia(PetShopFeliz petShopFeliz, 
-        PetShopRex shopRex)
-    {
-        if (petShopFeliz.Distancia < shopRex.Distancia)
-        {
-            PethShopMaisBarato 
-        }
-        else
-        {           
-            ColorRex = Color.Surface;
-        }
+    // private void EscolherMelhorCanilDistancia(PetShopFeliz petShopFeliz, 
+    //     PetShopRex shopRex)
+    // {
+    //     if (petShopFeliz.Distancia < shopRex.Distancia)
+    //     {
+          
+    //     }
+    //     else
+    //     {           
+    //     }
 
-    }
+    // }
 
-
-    private void AdicionarDados(){
-        CaninoFeliz.NomePetShop = "Meu Canino Feliz";
-        CaninoFeliz.PrecoBanhoP = 20.00m; 
-        CaninoFeliz.PrecoBanhoG = 40.00m; 
-        CaninoFeliz.Distancia = 2.0;
-
-        VaiRex.NomePetShop = "Vai Rex";
-        VaiRex.PrecoBanhoP = 15.00m; 
-        VaiRex.PrecoBanhoG = 50.00m; 
-        VaiRex.Distancia = 1.7m;
-
-        ChowChow.NomePetShop = "ChowChow";
-        ChowChow.PrecoBanhoP = 30.00m; 
-        ChowChow.PrecoBanhoG = 45.00m; 
-        ChowChow.Distancia = 0.8m;
-
-    }
 
 
     private void CalcularPreco(PetShopFeliz petshopFeliz, 
-                     PetShopRex petshopRex, PetShopChowChow petShopChochow)
+                               PetShopRex petshopRex, 
+                               PetShopChowChow petShopChochow)
     {
         var dataConvertida = (DateTime)_dataEscolhida;
         DataEscolhida = dataConvertida;
@@ -174,7 +156,9 @@
         MelhorCanilChowChow.Distancia = petShopChochow.Distancia;
 
 
-        if (DataEscolhida.DayOfWeek == DayOfWeek.Saturday || DataEscolhida.DayOfWeek == DayOfWeek.Sunday)
+        if (DataEscolhida.DayOfWeek == DayOfWeek.Saturday 
+                                    || 
+            DataEscolhida.DayOfWeek == DayOfWeek.Sunday)
         {
             MelhorCanilFeliz.PrecoTotal = CalcularTotalFinalDeSemanaFeliz(petshopFeliz, DonoCachorros);
             MelhorCanilVaiRex.PrecoTotal = CalcularTotalFinalSemanaVaiRex(petshopRex, DonoCachorros);
@@ -235,6 +219,27 @@
 
     }
     
+
+
+    private void AdicionarDadosPetShop( )
+    {
+        CaninoFeliz.NomePetShop = "Meu Canino Feliz";
+        CaninoFeliz.PrecoBanhoP = 20.00m; 
+        CaninoFeliz.PrecoBanhoG = 40.00m; 
+        CaninoFeliz.Distancia = 2.0m;
+
+        VaiRex.NomePetShop = "Vai Rex";
+        VaiRex.PrecoBanhoP = 15.00m; 
+        VaiRex.PrecoBanhoG = 50.00m; 
+        VaiRex.Distancia = 1.7m;
+
+        ChowChow.NomePetShop = "ChowChow";
+        ChowChow.PrecoBanhoP = 30.00m; 
+        ChowChow.PrecoBanhoG = 45.00m; 
+        ChowChow.Distancia = 0.8m;
+
+    }
+
 
   
 }
