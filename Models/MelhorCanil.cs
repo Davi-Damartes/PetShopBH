@@ -10,8 +10,10 @@ namespace PetShopBH.Models
             public int QntP { get; set; }
 
             public decimal PrecoTotal { get; set; }
-            public decimal Distancia { get; set; }
-            public EDiaSemana DiaDaSemana { get; set; }
+            public double Distancia { get; set; }
+
+            public bool MaisBarato { get; set; }
+         public EDiaSemana DiaDaSemana { get; set; }
 
         }
         public class CanilMaisBarato
