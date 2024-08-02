@@ -1,13 +1,52 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider />
+<MudThemeProvider @ref="@_mudThemeProvider" IsDarkMode="@_isDarkMode" />
 <MudPopoverProvider />
-<MudDialogProvider />
-<MudSnackbarProvider />
-
 <MudLayout>
+    <MudSpacer />
+
+    <div style="position: absolute; left: 50%; transform: translateX(-50%);">
+        <MudText Typo="Typo.h5" Align="Align.Center">
+            <MudElement HtmlTag="b" Style="font-size: 60px;">
+                PetShop Bh
+            </MudElement>
+        </MudText>
+    </div>
+
+
+    <MudSpacer />
+    <MudToggleIconButton @bind-Toggled="@_isDarkMode" Icon="@Icons.Material.Filled.DarkMode"
+                         Title="Tema Escuro" Color="Color.Dark"
+                         ToggledIcon="@Icons.Material.Filled.LightMode"
+                         ToggledColor="Color.Inherit"
+                         ToggledTitle="Tema Claro" />
+
+    <MudLink Color="Color.Dark" href="https://github.com/Davi-Damartes">
+        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Title="GitHub" Color="Color.Inherit" />
+    </MudLink>
+    <MudLink Color="Color.Dark" href="https://www.linkedin.com/in/davi-lima-643870313/">
+        <MudIconButton Icon="@Icons.Custom.Brands.LinkedIn" Title="LinkedIn" Color="Color.Info" />
+    </MudLink>
+    <MudLink Color="Color.Dark" href="mailto:davi.damartes@Gmail.com">
+        <MudIconButton Icon="@Icons.Custom.Brands.Gmail" Title="Gmail" Color="Color.Error" />
+    </MudLink>
     <MudMainContent>
         @Body
 
     </MudMainContent>
 </MudLayout>
+
+@code{
+    private bool _isDarkMode = true;
+    private MudThemeProvider? _mudThemeProvider;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _isDarkMode = await _mudThemeProvider!.GetSystemPreference();
+            _isDarkMode = false;
+            StateHasChanged();
+        }
+    }
+}
