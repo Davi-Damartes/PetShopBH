@@ -3,10 +3,10 @@
 <PageTitle>PetShop</PageTitle>
 
 <MudPaper Height="100vh" Width="100%">
-    <MudContainer MaxWidth="MaxWidth.ExtraLarge">
+    <MudContainer Style="width: 100%"  MaxWidth="MaxWidth.ExtraLarge">
         <MudGrid>
             <MudItem xs="6">
-                <MudPaper Height="100vh" Square="true">
+                <MudPaper Height="100vh" Width="100%" Square="true">
                     <MudGrid>
                         <MudItem xs="12">
                             <MudDatePicker MinDate="@DateTime.Today" Label="Data do Banho" @bind-Date="_dataEscolhida" Required="true" />
@@ -47,30 +47,32 @@
                 </MudPaper>
             </MudItem>
             <MudItem xs="6" style="background-color: lightgoldenrodyellow">
-                @* <MudPaper Height="100%" Square="true"> *@
                     @if (string.IsNullOrEmpty(MelhorCanilFeliz.NomePetShop))
                     {
-                        <MudText Typo="Typo.h3">Preencha os Dados para mostrar o resultado</MudText>
+                    <MudText Typo="Typo.h3" Color="Color.Success">
+                        Por favor, preencha os campos para mostrar o melhor preço do PetShop
+                       
+                    </MudText>
                     }
                     else
                     {
                         @foreach (var melhor in MelhorCanis.GroupBy(x => x.PrecoTotal).OrderBy(g => g.Key)
                        .SelectMany(g => g.OrderBy(x => x.Distancia)))
                         {
-                            <MudGrid Style="padding: 15px;">
+                            <MudGrid Style="padding: 13px;">
                                 <MudItem xs="12">
                                     <MudCard>
                                         <MudCardContent>
-                                            <MudText Typo="Typo.h4">@melhor.NomePetShop </MudText>
-                                            <MudText Typo="Typo.h5">Valor Banho R$: @melhor.PrecoTotal</MudText>
-                                            <MudText Typo="Typo.h5">Distância: @melhor.Distancia.ToString("C2")</MudText>
+                                            <MudText Class="mud-light-text" Typo="Typo.h4">@melhor.NomePetShop </MudText>
+                                            <MudText Class="mud-light-dark" Typo="Typo.h5">Valor Banho R$: @melhor.PrecoTotal</MudText>
+                                            <MudText Class="mud-light-text" Typo="Typo.h5">Distância: @melhor.Distancia.ToString("f2")</MudText>
+                                          
                                         </MudCardContent>
                                     </MudCard>
                                 </MudItem>
                             </MudGrid>
                         }
                     }
-               @*  </MudPaper> *@
             </MudItem>
         </MudGrid>
     </MudContainer>
