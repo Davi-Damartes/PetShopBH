@@ -3,9 +3,9 @@
 
 <PageTitle>PetShop</PageTitle>
 
- <MudPaper Height="100vh" Width="100%">
-<MudContainer MaxWidth="MaxWidth.ExtraLarge">
-     <MudPaper Height="100vh" Width="100%">
+<MudPaper Height="100vh" Width="100%">
+    <MudContainer MaxWidth="MaxWidth.ExtraLarge">
+        <MudPaper Height="100vh" Width="100%">
             <MudGrid>
                 <MudItem xs="6">
                     <MudPaper Height="400px" Width="100%" Square="true">
@@ -30,54 +30,47 @@
                                                  Variant="Variant.Text"
                                                  ErrorText="Por favor, digite um número">
                                 </MudNumericField>
-                             <div class="d-flex align-center justify-center" style="margin-top: 30px;">
-                                <MudButton OnClick="BuscarPetShop"
-                                    Variant="Variant.Filled" 
-                                    Style="font-size: 30px; border-radius: 15px;"
-                                    Color="Color.Success" Size="Size.Large">Buscar Petshop</MudButton>
-                             </div>
+                                <div class="d-flex align-center justify-center" style="margin-top: 30px;">
+                                    <MudButton OnClick="BuscarPetShop"
+                                               Variant="Variant.Filled"
+                                               Style="font-size: 30px; border-radius: 15px;"
+                                               Color="Color.Success" Size="Size.Large">Buscar Petshop</MudButton>
+                                </div>
                             </MudItem>
                         </MudGrid>
                     </MudPaper>
                 </MudItem>
-                    <MudItem xs="6">
-                        <MudPaper Height="400px" Width="100%" Square="true">
-                            @if (string.IsNullOrEmpty(MelhorCanilFeliz.NomePetShop))
-                            {
-                                <MudText Typo="Typo.h4">Prencha os Dados para mostrar o resultado</MudText>
-                            }
-                            else
+                <MudItem xs="6">
+                    <MudPaper Height="400px" Width="100%" Square="true">
+                        @if (string.IsNullOrEmpty(MelhorCanilFeliz.NomePetShop))
+                        {
+                            <MudText Typo="Typo.h3">Prencha os Dados para mostrar o resultado</MudText>
+                        }
+                        else
+                        {
+                            @foreach (var melhor in MelhorCanis.GroupBy(x => x.PrecoTotal).OrderBy(g => g.Key)               
+                                                               .SelectMany(g => g.OrderBy(x => x.Distancia)))
                             {
                                 <MudGrid>
                                     <MudItem xs="12">
                                         <MudCard>
-                                            <MudCardContent  Style="margin-bottom: 15px">
-                                                <MudText Typo="Typo.h4">@MelhorCanilFeliz.NomePetShop</MudText>
-                                                <MudText Typo="Typo.h5">Valor Banho: @MelhorCanilFeliz.PrecoTotal</MudText>
-                                                <MudText Typo="Typo.h5">Distancia: @MelhorCanilFeliz.Distancia.ToString("0.00")</MudText>                               
+                                            <MudCardContent Style="margin-bottom: 15px">
+                                                <MudText Typo="Typo.h4">@melhor.NomePetShop</MudText>
+                                                <MudText Typo="Typo.h5">Valor Banho: @melhor.PrecoTotal</MudText>
+                                                <MudText Typo="Typo.h5">Distancia: @melhor.Distancia.ToString("0.00")</MudText>
                                             </MudCardContent>
 
-                                            <MudCardContent Style="margin-bottom: 15px">
-                                                <MudText Typo="Typo.h4">@MelhorCanilChowChow.NomePetShop</MudText>
-                                                <MudText Typo="Typo.h5">Valor Banho: @MelhorCanilChowChow.PrecoTotal</MudText>
-                                                    <MudText Typo="Typo.h5">Distancia: @MelhorCanilChowChow.Distancia.ToString("F2")</MudText>
-                                            </MudCardContent>
-
-                                            <MudCardContent Style="margin-bottom: 15px">
-                                                <MudText  Typo="Typo.h4">@MelhorCanilVaiRex.NomePetShop</MudText>
-                                                <MudText Typo="Typo.h5">Valor Banho: @MelhorCanilVaiRex.PrecoTotal</MudText>
-                                            <MudText Typo="Typo.h5">Distancia: @MelhorCanilVaiRex.Distancia.ToString("C2")</MudText>
-                                            </MudCardContent>
                                         </MudCard>
                                     </MudItem>
                                 </MudGrid>
+
                             }
-                        </MudPaper>
-                    </MudItem>          
-                }
+                        }
+                    </MudPaper>
+                </MudItem>
             </MudGrid>
         </MudPaper>
-</MudContainer>
+    </MudContainer>
 </MudPaper>
 
 
@@ -93,10 +86,8 @@
 
     public PetShopChowChow ChowChow { get; set; } = new();
 
-    public Color ColorFeliz { get; set; }
-    public Color ColorRex { get; set; }
-    public Color ColorChowChow{ get; set; }
 
+    public List<MelhorCanil> MelhorCanis { get; set; } = new();
 
     public MelhorCanil MelhorCanilFeliz { get; set; } = new();
     public MelhorCanil MelhorCanilVaiRex { get; set; } = new();
@@ -111,30 +102,20 @@
     protected override void OnInitialized( )
     {
         AdicionarDadosPetShop();
+        MelhorCanis.Add(MelhorCanilFeliz);
+        MelhorCanis.Add(MelhorCanilVaiRex);
+        MelhorCanis.Add(MelhorCanilChowChow);
     }
 
     private void BuscarPetShop( )
     {
         CalcularPreco(CaninoFeliz, VaiRex, ChowChow);
+
+        StateHasChanged(); 
     }
 
-    // private void EscolherMelhorCanilDistancia(PetShopFeliz petShopFeliz, 
-    //     PetShopRex shopRex)
-    // {
-    //     if (petShopFeliz.Distancia < shopRex.Distancia)
-    //     {
-          
-    //     }
-    //     else
-    //     {           
-    //     }
-
-    // }
-
-
-
-    private void CalcularPreco(PetShopFeliz petshopFeliz, 
-                               PetShopRex petshopRex, 
+    private void CalcularPreco(PetShopFeliz petshopFeliz,
+                               PetShopRex petshopRex,
                                PetShopChowChow petShopChochow)
     {
         var dataConvertida = (DateTime)_dataEscolhida;
@@ -156,8 +137,8 @@
         MelhorCanilChowChow.Distancia = petShopChochow.Distancia;
 
 
-        if (DataEscolhida.DayOfWeek == DayOfWeek.Saturday 
-                                    || 
+        if (DataEscolhida.DayOfWeek == DayOfWeek.Saturday
+                                    ||
             DataEscolhida.DayOfWeek == DayOfWeek.Sunday)
         {
             MelhorCanilFeliz.PrecoTotal = CalcularTotalFinalDeSemanaFeliz(petshopFeliz, DonoCachorros);
@@ -170,11 +151,9 @@
             MelhorCanilVaiRex.PrecoTotal = CalcularTotalSemanaVaiRex(petshopRex, DonoCachorros);
         }
 
-
         MelhorCanilChowChow.PrecoTotal = petShopChochow.CalcularTotalChowChow(DonoCachorros);
 
     }
-
 
     private decimal CalcularTotalSemanaCaninoFeliz(PetShopFeliz petshop, DonoCachorros donoCachorros)
     {
@@ -182,7 +161,7 @@
         decimal somaCachorroP = donoCachorros.QuantidadeP * petshop.PrecoBanhoP;
         return somaCachorroG + somaCachorroP;
 
-    } 
+    }
     private decimal CalcularTotalFinalDeSemanaFeliz(PetShopFeliz petshop, DonoCachorros donoCachorros)
     {
         decimal precoPorcentagemG = 40m * 1.20m;
@@ -195,8 +174,7 @@
         decimal somaCachorroP = donoCachorros.QuantidadeP * petshop.PrecoBanhoP;
         return somaCachorroG + somaCachorroP;
 
-    } 
-    
+    }
 
     private decimal CalcularTotalSemanaVaiRex(PetShopRex petshop, DonoCachorros donoCachorros)
     {
@@ -218,28 +196,27 @@
         return somaCachorroG + somaCachorroP;
 
     }
-    
 
 
     private void AdicionarDadosPetShop( )
     {
         CaninoFeliz.NomePetShop = "Meu Canino Feliz";
-        CaninoFeliz.PrecoBanhoP = 20.00m; 
-        CaninoFeliz.PrecoBanhoG = 40.00m; 
-        CaninoFeliz.Distancia = 2.0m;
+        CaninoFeliz.PrecoBanhoP = 20.00m;
+        CaninoFeliz.PrecoBanhoG = 40.00m;
+        CaninoFeliz.Distancia = 2.0;
 
         VaiRex.NomePetShop = "Vai Rex";
-        VaiRex.PrecoBanhoP = 15.00m; 
-        VaiRex.PrecoBanhoG = 50.00m; 
-        VaiRex.Distancia = 1.7m;
+        VaiRex.PrecoBanhoP = 15.00m;
+        VaiRex.PrecoBanhoG = 50.00m;
+        VaiRex.Distancia = 1.7;
 
         ChowChow.NomePetShop = "ChowChow";
-        ChowChow.PrecoBanhoP = 30.00m; 
-        ChowChow.PrecoBanhoG = 45.00m; 
-        ChowChow.Distancia = 0.8m;
+        ChowChow.PrecoBanhoP = 30.00m;
+        ChowChow.PrecoBanhoG = 45.00m;
+        ChowChow.Distancia = 0.8;
 
     }
 
 
-  
+
 }
