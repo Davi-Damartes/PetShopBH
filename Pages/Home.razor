@@ -6,19 +6,19 @@
 <MudContainer Style="width: 100%" MaxWidth="MaxWidth.ExtraLarge">
 
     <MudGrid Justify="Justify.Center">
-        <MudItem xs="6">
-            <MudPaper Height="100%" Width="100%" Square="true">
+        <MudItem xs="12" sm="6" md="6" lg="6">
+            <MudPaper Height="100%" Width="100%" Square="true" style="padding: 20px">
 
 
                 @if (string.IsNullOrEmpty(MelhorCanilFeliz.NomePetShop))
                 {
-                    <MudText class="d-flex align-center justify-center">
-                        <MudIcon Color="Color.Info" Icon="@Icons.Material.Filled.Info"></MudIcon>
-                        Por favor, preencha os campos para mostrar o melhor preço do PetShop
+                    <MudText class="d-flex align-center justify-center" style="padding-bottom: 20px">
+                        <MudIcon Color="Color.Info" Icon="@Icons.Material.Filled.Info" Style="padding-right: 8px"></MudIcon>
+                        Por favor, complete os campos abaixo para exibir a melhor oferta disponível no PetShop.
                     </MudText>
                 }
 
-                <EditForm style="padding: 20px" Model="@DonoCachorros" OnValidSubmit="OnValidSubmit">
+                <EditForm Model="@DonoCachorros" OnValidSubmit="OnValidSubmit">
 
                     <MudGrid>
 
@@ -27,7 +27,7 @@
                                            @bind-Date="_dataEscolhida" Required="true" />
                         </MudItem>
 
-                        <MudItem xs="6">
+                        <MudItem xs="12" sm="12" md="6" lg="6">
                             <MudNumericField Label="Quantidade de Cachorros Pequenos"
                                              Required="true"
                                              Min="0" Max="50"
@@ -40,7 +40,7 @@
 
                         </MudItem>
 
-                        <MudItem xs="6">
+                        <MudItem xs="12" sm="12" md="6" lg="6">
                             <MudNumericField Label="Quantidade de Cachorros Grandes"
                                              Required="true"
                                              Min="0" Max="50"
@@ -54,52 +54,47 @@
                         </MudItem>
 
 
-                        <MudItem xs="12">
-
-
-                            <div class="d-flex justify-space-between gap-2">
+                        <MudItem xs="12" sm="12" md="6" lg="6">
                                 <MudButton Variant="Variant.Filled" Color="Color.Warning"
                                            OnClick="@(()=> ZerarForm())"
+                                           FullWidth
                                            Disabled="HabilitarButton()"
                                            Style="border-radius: 40px;">
                                     Limpar formulário
                                 </MudButton>
+                       </MudItem>
+                       <MudItem xs="12" sm="12" md="6" lg="6" >
                                 <MudButton ButtonType="ButtonType.Submit"
-                                           Variant="Variant.Filled"
+                                       FullWidth
+                                           Variant="Variant.Filled" 
                                            Disabled="HabilitarButton()"
                                            Style="border-radius: 40px;"
                                            Color="Color.Success">
                                     Buscar Petshop
                                 </MudButton>
-                            </div>
-
-
-                            @if (!string.IsNullOrEmpty(MelhorCanilFeliz.NomePetShop))
-                            {
-                                <div class="d-flex align-center justify-center">
-                                    <MudImage Src="Imagem/ImagemPetShop.jpg" Width="232" Height="150"
-                                              Alt="Imagem PetShop" Elevation="25" Class="rounded-lg ma-4" />
-                                </div>
-                                
-                            }
-
-
-
+                         
                         </MudItem>
 
-
-                    </MudGrid>
                     <DataAnnotationsValidator />
                     <ValidationSummary />
+
+                    </MudGrid>
+                    @if (!string.IsNullOrEmpty(MelhorCanilFeliz.NomePetShop))
+                    {
+                        <div class="d-flex align-center justify-center">
+                            <MudImage Src="Imagem/ImagemPetShop.jpg" Width="232" Height="150"
+                                        Alt="Imagem PetShop" Elevation="25" Class="rounded-lg ma-4" />
+                        </div>
+                                
+                    }
                 </EditForm>
             </MudPaper>
         </MudItem>
 
-        <MudItem xs="6" style="width: 100%">
+        <MudItem xs="12" sm="6" md="6" lg="6" style="width: 100%">
             <MudPaper Height="100%" Width="100%" Square="true">
                @if (!string.IsNullOrEmpty(MelhorCanilFeliz.NomePetShop))
                 {
-                   
                     bool isFirst = true;
                     @foreach (var melhor in MelhorCanis.GroupBy(x => x.PrecoTotal).OrderBy(g => g.Key)
                    .SelectMany(g => g.OrderBy(x => x.Distancia)))
@@ -122,13 +117,13 @@
                 else
                 {
                     <div style="height: 100%">
-                        <div class="d-flex justify-center" >
-                            <MudImage Src="Imagem/ImagemPetShop.jpg" Width="232" Height="150"
-                                Alt="Imagem PetShop" Elevation="25" Class="rounded-lg ma-4" />
-                        </div>
+                         <div class="d-flex align-center justify-center">
+                                    <MudImage Src="Imagem/ImagemPetShop.jpg" Width="232" Height="150"
+                                              Alt="Imagem PetShop" Elevation="25" Class="rounded-lg ma-4" />
+                                </div>
                         <MudCardContent Class="d-grid align-items-center justify-content-center">
                             <MudText Class="mud-light-text">
-                                Qual será o melhor de PetShop Belo Horizonte?
+                                Qual é a melhor escolha de PetShop em Belo Horizonte?
                             </MudText>
                      </MudCardContent>
                     </div>
