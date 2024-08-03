@@ -97,7 +97,7 @@
                 {
                     bool isFirst = true;
                     @foreach (var melhor in MelhorCanis.GroupBy(x => x.PrecoTotal).OrderBy(g => g.Key)
-                   .SelectMany(g => g.OrderBy(x => x.Distancia)))
+                                                       .SelectMany(g => g.OrderBy(x => x.Distancia)))
                     {
                         <MudCardContent Style="border: 1px solid #e9e9e9" class="card-hover">
                             @if (isFirst)
@@ -161,7 +161,7 @@
 
     public PetShopRex VaiRex { get; set; } = new();
 
-    public PetShopChowChow ChowChow { get; set; } = new();
+    public PetShopChowChawgas ChowChow { get; set; } = new();
 
 
     public List<MelhorCanil> MelhorCanis { get; set; } = new();
@@ -219,7 +219,7 @@
 
     private void CalcularPreco(PetShopFeliz petshopFeliz,
                                PetShopRex petshopRex,
-                               PetShopChowChow petShopChochow)
+                               PetShopChowChawgas petShopChochow)
     {
         var dataConvertida = (DateTime)_dataEscolhida!;
         DataEscolhida = dataConvertida;
