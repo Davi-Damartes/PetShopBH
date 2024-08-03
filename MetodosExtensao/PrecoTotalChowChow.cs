@@ -6,10 +6,10 @@ namespace PetShopBH.MetodosExtensao
     {
         public static decimal CalcularTotalChowChow(this PetShopChowChow petshop, DonoCachorros donoCachorros)
         {
-            decimal somaCachorroG = donoCachorros.QuantidadeG * petshop.PrecoBanhoG;
-            decimal somaCachorroP = donoCachorros.QuantidadeP * petshop.PrecoBanhoP;
+            decimal somaCachorroGrande = donoCachorros.QuantidadeDogGrande * petshop.PrecoBanhoDogGrande;
+            decimal somaCachorroPequeno = donoCachorros.QuantidadeDogPequeno * petshop.PrecoBanhoDogPequeno;
 
-            return somaCachorroG + somaCachorroP;
+            return somaCachorroGrande + somaCachorroPequeno;
 
         }
     }
