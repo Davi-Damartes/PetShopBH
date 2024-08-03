@@ -25,7 +25,7 @@ Durante o desenvolvimento do projeto, aprendi a organizar conceitos e implementa
  - Blazor Wasm: Permite criar interfaces de usuário em C# no navegador, de modo a ofertar um projeto responsivo.
  - Github Page: Plataforma de hospedagem gratuita para sites estáticos, ideal para publicar e manter a documentação e o site do projeto como Blazor Wasm.
  - Framework MudBlazor: Framework de componentes para Blazor que fornece um conjunto de componentes prontos para criar layouts modernos e responsivos.
-
+ - XUnit: Utilizei Testes Unitários para garantir a segurança e manutenibilidade do código, confirmando as funcionalidades dos métodos no projeto.
 
 ## ⚗ Como executar 
 > **Aviso:** Certifique-se de ter o .NET instalado em sua máquina antes de prosseguir.
