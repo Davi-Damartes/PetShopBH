@@ -6,23 +6,24 @@ namespace PetShopBH.MetodosExtensao
     {
         public static decimal CalcularTotalSemanaCaninoFeliz(this PetShopFeliz petshop, DonoCachorros donoCachorros)
         {
-            decimal somaCachorroG = donoCachorros.QuantidadeG * petshop.PrecoBanhoG;
-            decimal somaCachorroP = donoCachorros.QuantidadeP * petshop.PrecoBanhoP;
+            decimal somaCachorroPequeno = donoCachorros.QuantidadeDogPequeno * petshop.PrecoBanhoDogPequeno;
+            decimal somaCachorroGrande = donoCachorros.QuantidadeDogGrande * petshop.PrecoBanhoDogGrande;
 
-            return somaCachorroG + somaCachorroP;
+            return somaCachorroGrande + somaCachorroPequeno;
 
         }
         public static decimal CalcularTotalFinalDeSemanaFeliz(this PetShopFeliz petshop, DonoCachorros donoCachorros)
         {
-            decimal precoPorcentagemG = 40m * 1.20m;
-            decimal precoPorcentagemP = 20m * 1.20m;
+            decimal precoPorcentagemPequeno = 20m * 1.20m;
+            decimal precoPorcentagemGrande = 40m * 1.20m;
 
-            petshop.PrecoBanhoP = precoPorcentagemP;
-            petshop.PrecoBanhoG = precoPorcentagemG;
+            petshop.PrecoBanhoDogPequeno = precoPorcentagemPequeno;
+            petshop.PrecoBanhoDogGrande = precoPorcentagemGrande;
 
-            decimal somaCachorroG = donoCachorros.QuantidadeG * petshop.PrecoBanhoG;
-            decimal somaCachorroP = donoCachorros.QuantidadeP * petshop.PrecoBanhoP;
-            return somaCachorroG + somaCachorroP;
+            decimal somaCachorroPequeno = donoCachorros.QuantidadeDogPequeno * petshop.PrecoBanhoDogPequeno;
+            decimal somaCachorroGrande = donoCachorros.QuantidadeDogGrande * petshop.PrecoBanhoDogGrande;
+            
+            return somaCachorroGrande + somaCachorroPequeno;
 
         }
     }
