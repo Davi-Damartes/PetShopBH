@@ -1,6 +1,6 @@
 ﻿namespace PetShopBH.Models
 {
-    public class PetShopChowChow
+    public class PetShopChowChawgas
     {
         public string NomePetShop { get; set; } = string.Empty;
 
