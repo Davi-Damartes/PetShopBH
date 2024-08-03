@@ -2,11 +2,11 @@
 
 <MudThemeProvider @ref="@_mudThemeProvider" IsDarkMode="@_isDarkMode" />
 <MudPopoverProvider />
-<MudLayout>
+<MudLayout Style="height: 100vh;">
     <MudSpacer />
 
     <div style="position: absolute; left: 50%; transform: translateX(-50%);">
-        <MudText Typo="Typo.h5" Align="Align.Center">
+        <MudText Typo="Typo.h6" Align="Align.Center">
             <MudElement HtmlTag="b" Style="font-size: 60px;">
                 PetShop Bh
             </MudElement>
@@ -16,12 +16,12 @@
 
     <MudSpacer />
     <MudToggleIconButton @bind-Toggled="@_isDarkMode" Icon="@Icons.Material.Filled.DarkMode"
-                         Title="Tema Escuro" Color="Color.Dark"
+                         Color="Color.Dark"
                          ToggledIcon="@Icons.Material.Filled.LightMode"
                          ToggledColor="Color.Inherit"
                          ToggledTitle="Tema Claro" />
 
-    <MudLink Color="Color.Dark" href="https://github.com/Davi-Damartes">
+    <MudLink Color="Color.Dark" href="https://github.com/Davi-Damartes/PetShopBH">
         <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Title="GitHub" Color="Color.Inherit" />
     </MudLink>
     <MudLink Color="Color.Dark" href="https://www.linkedin.com/in/davi-lima-643870313/">
@@ -30,6 +30,8 @@
     <MudLink Color="Color.Dark" href="mailto:davi.damartes@Gmail.com">
         <MudIconButton Icon="@Icons.Custom.Brands.Gmail" Title="Gmail" Color="Color.Error" />
     </MudLink>
+
+
     <MudMainContent>
         @Body
 
